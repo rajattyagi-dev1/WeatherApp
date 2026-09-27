@@ -3,32 +3,45 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+import UmbrellaIcon from "@mui/icons-material/Umbrella";
+import SunnyIcon from "@mui/icons-material/Sunny";
 
-export default function InfoBox() {
+export default function InfoBox({ info }) {
   const INIT_URL =
     "https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-  let info = {
-    city: "Delhi",
-    feelsLike: 29.76,
-    humidity: 63,
-    temp: 27.98,
-    tempMax: 27.98,
-    tempMin: 27.98,
-    weather: "broken clouds",
-  };
+
+  let COLD_URL =
+    "https://plus.unsplash.com/premium_photo-1675715923850-b5be1d5d71a7?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29sZHdlYXRoZXJ8ZW58MHx8MHx8fDA%3D";
+  let RAIN_URL =
+    "https://images.unsplash.com/photo-1428592953211-077101b2021b?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  let HOT_URL =
+    "https://images.unsplash.com/photo-1504370805625-d32c54b16100?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   return (
     <div className="infoBox">
-      <h3>WeatherInfo - {info.weather}</h3>
       <div className="cardContainer">
         <Card sx={{ maxWidth: 345 }}>
           <CardMedia
             sx={{ height: 140 }}
-            image={INIT_URL}
+            image={
+              info.humidity > 80
+                ? RAIN_URL
+                : info.temp > 20
+                  ? HOT_URL
+                  : COLD_URL
+            }
             title="green iguana"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {info.city}
+              {info.humidity > 80 ? (
+                <UmbrellaIcon />
+              ) : info.temp > 20 ? (
+                <SunnyIcon />
+              ) : (
+                <AcUnitIcon />
+              )}
             </Typography>
             <Typography
               variant="body2"
