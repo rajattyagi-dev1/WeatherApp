@@ -13,6 +13,7 @@ export default function SearchBox() {
     let jsonres = await res.json();
     console.log(jsonres);
     let result = {
+      city: city,
       temp: jsonres.main.temp,
       tempMin: jsonres.main.temp_min,
       tempMax: jsonres.main.temp_max,
